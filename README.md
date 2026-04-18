@@ -7,10 +7,11 @@
 [![Node.js](https://img.shields.io/badge/Node.js-16+-green.svg?style=for-the-badge&logo=node.js)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-18.2-blue.svg?style=for-the-badge&logo=react)](https://reactjs.org/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-8.0-green.svg?style=for-the-badge&logo=mongodb)](https://www.mongodb.com/)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-success?style=for-the-badge&logo=vercel)](https://next-gen-code-analyzer.vercel.app)
 
 **AI-powered code analysis platform that helps developers write cleaner, more maintainable code with real-time feedback and intelligent suggestions.**
 
-[Features](#-features) • [Demo](#-demo) • [Installation](#-installation) • [Tech Stack](#️-tech-stack) • [Usage](#-usage)
+### 🌐 [Live Demo](https://next-gen-code-analyzer.vercel.app) | [Features](#-features) | [Installation](#-installation) | [Tech Stack](#️-tech-stack)
 
 </div>
 
