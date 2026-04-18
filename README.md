@@ -231,13 +231,19 @@ nextgen-code-analyzer/
 
 ## 🔍 Supported Languages
 
-- JavaScript
-- TypeScript
-- React JSX
-- Python
-- Java
-- C
-- C++
+<div align="center">
+
+| Language | Support | Features |
+|----------|---------|----------|
+| ![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) | ✅ Full | AST parsing, complexity analysis |
+| ![TypeScript](https://img.shields.io/badge/-TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white) | ✅ Full | Type checking, AST parsing |
+| ![React](https://img.shields.io/badge/-React-61DAFB?style=flat-square&logo=react&logoColor=black) | ✅ Full | JSX analysis, component patterns |
+| ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white) | ✅ Full | PEP 8, indentation analysis |
+| ![Java](https://img.shields.io/badge/-Java-007396?style=flat-square&logo=java&logoColor=white) | ✅ Full | OOP patterns, method analysis |
+| ![C](https://img.shields.io/badge/-C-A8B9CC?style=flat-square&logo=c&logoColor=black) | ✅ Full | Memory safety, security checks |
+| ![C++](https://img.shields.io/badge/-C++-00599C?style=flat-square&logo=cplusplus&logoColor=white) | ✅ Full | Modern C++, STL usage |
+
+</div>
 
 ## 🤝 Contributing
 
