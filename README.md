@@ -32,25 +32,25 @@ NextGen Code Analyzer is a full-stack web application that analyzes source code 
 
 ## 🎬 Demo
 
+### 🔐 Login Page
+> Secure authentication with modern glassmorphism design
+
+![Login](screenshots/login.png)
+
 ### 🖥️ Dashboard
 > Track your code quality metrics and recent analyses
 
-![Dashboard](https://via.placeholder.com/800x400/667eea/ffffff?text=Dashboard+Screenshot)
+![Dashboard](screenshots/dashborad.png)
 
 ### 🔍 Code Analyzer
 > Real-time code analysis with instant feedback
 
-![Code Analyzer](https://via.placeholder.com/800x400/764ba2/ffffff?text=Code+Analyzer+Screenshot)
-
-### 📊 Analysis Results
-> Detailed metrics, issues, and AI-powered suggestions
-
-![Analysis Results](https://via.placeholder.com/800x400/667eea/ffffff?text=Analysis+Results+Screenshot)
+![Code Analyzer](screenshots/codeanalyzer.png)
 
 ### 📈 History Tracking
 > Monitor your code quality improvements over time
 
-![History](https://via.placeholder.com/800x400/764ba2/ffffff?text=History+Screenshot)
+![History](screenshots/history.png)
 
 ---
 
