@@ -48,15 +48,22 @@ export default function Dashboard({ setToken }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-darker via-dark to-primary/10">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Animated background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary-600/10 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-secondary-600/10 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/2 right-1/3 w-96 h-96 bg-accent-600/10 rounded-full blur-3xl animate-float" style={{animationDelay: '4s'}}></div>
+      </div>
+
       <Navbar setToken={setToken} />
 
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="mb-12">
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+      <div className="max-w-7xl mx-auto px-6 py-12 relative z-10">
+        <div className="mb-12 text-center">
+          <h1 className="text-5xl font-bold mb-4 gradient-text animate-pulse-slow">
             Welcome to Your Dashboard
           </h1>
-          <p className="text-gray-400">Analyze, optimize, and improve your code quality with AI-powered insights</p>
+          <p className="text-gray-400 text-lg">Analyze, optimize, and improve your code quality with AI-powered insights</p>
         </div>
 
         {loading ? (
@@ -91,54 +98,60 @@ export default function Dashboard({ setToken }) {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
-              <Link to="/analyzer" className="card p-8 hover:border-primary transition-all duration-300 group cursor-pointer">
-                <div className="flex items-center mb-4">
-                  <div className="bg-primary/20 p-4 rounded-lg group-hover:bg-primary/30 transition-all group-hover:scale-110 duration-300">
-                    <FiCode className="text-3xl text-primary" />
+              <Link to="/analyzer" className="glass-card-hover p-8 group cursor-pointer relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="relative z-10">
+                  <div className="flex items-center mb-6">
+                    <div className="bg-gradient-to-br from-primary-600 to-primary-400 p-4 rounded-2xl shadow-glow group-hover:scale-110 transition-transform duration-300">
+                      <FiCode className="text-3xl text-white" />
+                    </div>
                   </div>
+                  <h2 className="text-2xl font-bold mb-3 gradient-text">Analyze Code</h2>
+                  <p className="text-gray-400">Upload your code and get instant AI-powered analysis with optimization suggestions</p>
                 </div>
-                <h2 className="text-2xl font-bold mb-2">Analyze Code</h2>
-                <p className="text-gray-400">Upload your code and get instant AI-powered analysis with optimization suggestions</p>
               </Link>
 
-              <Link to="/history" className="card p-8 hover:border-secondary transition-all duration-300 group cursor-pointer">
-                <div className="flex items-center mb-4">
-                  <div className="bg-secondary/20 p-4 rounded-lg group-hover:bg-secondary/30 transition-all group-hover:scale-110 duration-300">
-                    <FiClock className="text-3xl text-secondary" />
+              <Link to="/history" className="glass-card-hover p-8 group cursor-pointer relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-secondary-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="relative z-10">
+                  <div className="flex items-center mb-6">
+                    <div className="bg-gradient-to-br from-secondary-600 to-secondary-400 p-4 rounded-2xl shadow-glow group-hover:scale-110 transition-transform duration-300">
+                      <FiClock className="text-3xl text-white" />
+                    </div>
                   </div>
+                  <h2 className="text-2xl font-bold mb-3 gradient-text">Analysis History</h2>
+                  <p className="text-gray-400">View your past code analyses and track improvements over time</p>
                 </div>
-                <h2 className="text-2xl font-bold mb-2">Analysis History</h2>
-                <p className="text-gray-400">View your past code analyses and track improvements over time</p>
               </Link>
             </div>
 
             {recentAnalyses.length > 0 && (
-              <div className="card p-6">
-                <h2 className="text-2xl font-bold mb-6">Recent Analyses</h2>
+              <div className="glass-card p-8">
+                <h2 className="text-2xl font-bold mb-6 gradient-text">Recent Analyses</h2>
                 <div className="space-y-4">
                   {recentAnalyses.map((analysis) => (
-                    <div key={analysis._id} className="bg-gray-800 p-4 rounded-lg hover:bg-gray-750 transition-all">
-                      <div className="flex justify-between items-start mb-2">
+                    <div key={analysis._id} className="glass-card-hover p-5 group">
+                      <div className="flex justify-between items-start mb-3">
                         <div>
-                          <h3 className="font-semibold text-lg">{analysis.fileName}</h3>
-                          <p className="text-sm text-gray-400">
-                            <FiClock className="inline mr-1" />
+                          <h3 className="font-semibold text-lg text-white group-hover:gradient-text transition-all">{analysis.fileName}</h3>
+                          <p className="text-sm text-gray-400 flex items-center mt-1">
+                            <FiClock className="inline mr-2" />
                             {formatDate(analysis.createdAt)}
                           </p>
                         </div>
-                        <span className="bg-primary/20 text-primary px-3 py-1 rounded-full text-sm">
+                        <span className="glass-card px-4 py-2 text-sm font-semibold gradient-text border border-primary-500/30">
                           {analysis.language}
                         </span>
                       </div>
-                      <div className="flex space-x-4 text-sm">
+                      <div className="flex space-x-6 text-sm">
                         <span className="text-gray-400">
-                          Complexity: <span className="text-primary font-semibold">{analysis.metrics.complexity}</span>
+                          Complexity: <span className="text-primary-400 font-bold">{analysis.metrics.complexity}</span>
                         </span>
                         <span className="text-gray-400">
-                          Issues: <span className="text-yellow-500 font-semibold">{analysis.issues.length}</span>
+                          Issues: <span className="text-yellow-400 font-bold">{analysis.issues.length}</span>
                         </span>
                         <span className="text-gray-400">
-                          Lines: <span className="text-blue-500 font-semibold">{analysis.metrics.linesOfCode}</span>
+                          Lines: <span className="text-blue-400 font-bold">{analysis.metrics.linesOfCode}</span>
                         </span>
                       </div>
                     </div>

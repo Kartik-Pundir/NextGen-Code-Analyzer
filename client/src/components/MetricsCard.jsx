@@ -1,24 +1,27 @@
 export default function MetricsCard({ icon: Icon, value, label, color = 'primary' }) {
   const colorClasses = {
-    primary: 'text-primary bg-primary/20',
-    secondary: 'text-secondary bg-secondary/20',
-    success: 'text-green-500 bg-green-500/20',
-    warning: 'text-yellow-500 bg-yellow-500/20',
-    danger: 'text-red-500 bg-red-500/20',
-    info: 'text-blue-500 bg-blue-500/20'
+    primary: 'from-primary-600 to-primary-400',
+    secondary: 'from-secondary-600 to-secondary-400',
+    success: 'from-green-600 to-green-400',
+    warning: 'from-yellow-600 to-yellow-400',
+    danger: 'from-red-600 to-red-400',
+    info: 'from-blue-600 to-blue-400'
   };
 
   return (
-    <div className="bg-gray-800 p-4 rounded-lg hover:bg-gray-750 transition-all">
-      <div className="flex items-center justify-between mb-2">
-        <div className={`p-2 rounded-lg ${colorClasses[color]}`}>
-          <Icon className="text-xl" />
+    <div className="metric-card relative overflow-hidden">
+      <div className={`absolute inset-0 bg-gradient-to-br ${colorClasses[color]} opacity-10 group-hover:opacity-20 transition-opacity`}></div>
+      <div className="relative z-10">
+        <div className="flex items-center justify-between mb-3">
+          <div className={`p-3 rounded-xl bg-gradient-to-br ${colorClasses[color]} shadow-lg`}>
+            <Icon className="text-2xl text-white" />
+          </div>
+          <div className={`text-3xl font-bold bg-gradient-to-br ${colorClasses[color]} bg-clip-text text-transparent`}>
+            {value}
+          </div>
         </div>
-        <div className={`text-2xl font-bold ${colorClasses[color].split(' ')[0]}`}>
-          {value}
-        </div>
+        <div className="text-sm text-gray-400 font-medium">{label}</div>
       </div>
-      <div className="text-sm text-gray-400">{label}</div>
     </div>
   );
 }
