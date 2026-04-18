@@ -184,49 +184,56 @@ public:
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-darker via-dark to-secondary/10">
+    <div className="min-h-screen bg-dark-950 relative overflow-hidden">
+      {/* Animated Background Orbs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary-500/20 rounded-full blur-3xl animate-float-delayed"></div>
+        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
+      </div>
+
       <Navbar setToken={setToken} />
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Code Analyzer</h1>
-          <p className="text-gray-400">Paste your code below and get instant AI-powered analysis</p>
+      <div className="max-w-7xl mx-auto px-4 py-8 relative z-10">
+        <div className="mb-8 text-center">
+          <h1 className="text-5xl font-bold mb-4 gradient-text">Code Analyzer</h1>
+          <p className="text-gray-400 text-lg">Paste your code below and get instant AI-powered analysis</p>
         </div>
 
         {error && (
-          <div className="bg-red-500/10 border border-red-500 text-red-500 p-4 rounded-lg mb-6 flex items-center">
-            <FiAlertCircle className="mr-2" />
+          <div className="glass-card bg-red-500/10 border-red-500/50 text-red-400 p-4 mb-6 flex items-center glow-effect">
+            <FiAlertCircle className="mr-2 text-xl" />
             {error}
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="card p-6">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold">Input Code</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="glass-card-hover p-8">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold gradient-text">Input Code</h2>
               <button
                 onClick={handleLoadSample}
-                className="text-sm text-primary hover:text-secondary transition-colors"
+                className="text-sm px-4 py-2 glass-card hover:bg-white/10 rounded-lg transition-all duration-300"
               >
                 Load Sample
               </button>
             </div>
             
-            <div className="mb-4">
-              <label className="block text-sm font-medium mb-2">File Name</label>
+            <div className="mb-6">
+              <label className="block text-sm font-medium mb-2 text-gray-300">File Name</label>
               <input
                 type="text"
-                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-secondary"
+                className="input-field"
                 placeholder="example.js"
                 value={fileName}
                 onChange={(e) => setFileName(e.target.value)}
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium mb-2">Language</label>
+            <div className="mb-6">
+              <label className="block text-sm font-medium mb-2 text-gray-300">Language</label>
               <select
-                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-secondary"
+                className="input-field"
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
               >
@@ -240,8 +247,8 @@ public:
               </select>
             </div>
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium mb-2">Code</label>
+            <div className="mb-6">
+              <label className="block text-sm font-medium mb-2 text-gray-300">Code</label>
               <CodeEditor
                 value={code}
                 onChange={setCode}
@@ -253,7 +260,7 @@ public:
             <button
               onClick={handleAnalyze}
               disabled={loading || !code.trim()}
-              className="btn-primary w-full flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn-primary w-full flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed text-lg"
             >
               {loading ? (
                 <>
@@ -267,20 +274,20 @@ public:
             </button>
           </div>
 
-          <div className="card p-6">
-            <h2 className="text-2xl font-bold mb-4">Analysis Results</h2>
+          <div className="glass-card-hover p-8">
+            <h2 className="text-2xl font-bold mb-6 gradient-text">Analysis Results</h2>
             
             {!result ? (
-              <div className="flex items-center justify-center h-96 text-gray-500">
+              <div className="flex items-center justify-center h-96 text-gray-400">
                 <div className="text-center">
-                  <div className="text-6xl mb-4 opacity-50">📊</div>
-                  <p>Submit code to see analysis results</p>
+                  <div className="text-7xl mb-6 opacity-50 animate-pulse-slow">📊</div>
+                  <p className="text-lg">Submit code to see analysis results</p>
                 </div>
               </div>
             ) : (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-lg font-semibold mb-3">Code Metrics</h3>
+                  <h3 className="text-lg font-semibold mb-4 text-gray-200">Code Metrics</h3>
                   <div className="grid grid-cols-3 gap-4">
                     <MetricsCard
                       icon={() => <span>🔄</span>}
@@ -304,11 +311,11 @@ public:
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold mb-3">Issues Found ({result.issues.length})</h3>
-                  <div className="space-y-2 max-h-48 overflow-y-auto">
+                  <h3 className="text-lg font-semibold mb-4 text-gray-200">Issues Found ({result.issues.length})</h3>
+                  <div className="space-y-3 max-h-48 overflow-y-auto custom-scrollbar">
                     {result.issues.length === 0 ? (
-                      <div className="bg-green-500/10 border border-green-500/30 p-4 rounded-lg text-center">
-                        <p className="text-green-500">✨ No issues found! Your code looks great!</p>
+                      <div className="glass-card bg-green-500/10 border-green-500/30 p-4 text-center glow-effect">
+                        <p className="text-green-400 font-medium">✨ No issues found! Your code looks great!</p>
                       </div>
                     ) : (
                       result.issues.map((issue, idx) => (
@@ -319,10 +326,10 @@ public:
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold mb-3">AI Suggestions</h3>
-                  <div className="space-y-2 max-h-48 overflow-y-auto">
+                  <h3 className="text-lg font-semibold mb-4 text-gray-200">AI Suggestions</h3>
+                  <div className="space-y-3 max-h-48 overflow-y-auto custom-scrollbar">
                     {result.suggestions.map((suggestion, idx) => (
-                      <div key={idx} className="bg-gray-800 p-3 rounded-lg hover:bg-gray-750 transition-all">
+                      <div key={idx} className="glass-card p-4 hover:bg-white/10 transition-all duration-300">
                         <p className="text-sm text-gray-300">{suggestion}</p>
                       </div>
                     ))}

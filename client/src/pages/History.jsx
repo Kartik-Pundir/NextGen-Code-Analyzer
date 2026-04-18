@@ -57,19 +57,26 @@ export default function History({ token, setToken }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-darker via-dark to-primary/10">
+    <div className="min-h-screen bg-dark-950 relative overflow-hidden">
+      {/* Animated Background Orbs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary-500/20 rounded-full blur-3xl animate-float-delayed"></div>
+        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
+      </div>
+
       <Navbar setToken={setToken} />
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4 py-8 relative z-10">
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold mb-2">Analysis History</h1>
-            <p className="text-gray-400">Track your code quality improvements over time</p>
+            <h1 className="text-5xl font-bold mb-3 gradient-text">Analysis History</h1>
+            <p className="text-gray-400 text-lg">Track your code quality improvements over time</p>
           </div>
           {analyses.length > 0 && (
             <button
               onClick={exportToJSON}
-              className="btn-secondary flex items-center"
+              className="btn-secondary flex items-center glow-effect"
             >
               <FiDownload className="mr-2" /> Export
             </button>
@@ -77,33 +84,33 @@ export default function History({ token, setToken }) {
         </div>
 
         {!loading && analyses.length > 0 && (
-          <div className="flex space-x-4 mb-6">
+          <div className="flex space-x-4 mb-8">
             <button
               onClick={() => setFilter('all')}
-              className={`px-4 py-2 rounded-lg transition-all ${
+              className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                 filter === 'all'
-                  ? 'bg-primary text-white'
-                  : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                  ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-glow'
+                  : 'glass-card text-gray-400 hover:bg-white/10'
               }`}
             >
               All ({analyses.length})
             </button>
             <button
               onClick={() => setFilter('issues')}
-              className={`px-4 py-2 rounded-lg transition-all ${
+              className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                 filter === 'issues'
-                  ? 'bg-yellow-500 text-white'
-                  : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                  ? 'bg-gradient-to-r from-yellow-500 to-orange-500 text-white shadow-glow'
+                  : 'glass-card text-gray-400 hover:bg-white/10'
               }`}
             >
               With Issues ({analyses.filter(a => a.issues.length > 0).length})
             </button>
             <button
               onClick={() => setFilter('clean')}
-              className={`px-4 py-2 rounded-lg transition-all ${
+              className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                 filter === 'clean'
-                  ? 'bg-green-500 text-white'
-                  : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                  ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-glow'
+                  : 'glass-card text-gray-400 hover:bg-white/10'
               }`}
             >
               Clean Code ({analyses.filter(a => a.issues.length === 0).length})

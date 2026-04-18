@@ -59,8 +59,7 @@
   }
   
   .metric-card {
-    @apply glass-card p-6 hover:scale-105 transition-all duration-300 cursor-pointer
-           hover:shadow-glow group;
+    @apply glass-card p-6 hover:scale-105 transition-all duration-300 cursor-pointer hover:shadow-glow;
   }
   
   .nav-link {
