@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/api';
 import { FiCode, FiUser, FiMail, FiLock } from 'react-icons/fi';
 
 export default function Register({ setToken }) {
@@ -11,7 +11,7 @@ export default function Register({ setToken }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post('/api/auth/register', formData);
+      const { data } = await api.post('/api/auth/register', formData);
       setToken(data.token);
       navigate('/dashboard');
     } catch (err) {

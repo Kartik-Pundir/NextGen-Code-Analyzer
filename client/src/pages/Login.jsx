@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/api';
 import { FiCode, FiMail, FiLock } from 'react-icons/fi';
 
 export default function Login({ setToken }) {
@@ -11,7 +11,7 @@ export default function Login({ setToken }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post('/api/auth/login', formData);
+      const { data } = await api.post('/api/auth/login', formData);
       setToken(data.token);
       navigate('/dashboard');
     } catch (err) {
