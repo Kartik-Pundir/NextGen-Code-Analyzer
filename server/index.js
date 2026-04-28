@@ -16,7 +16,13 @@ app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 
 // Database connection
-connectDB();
+if (process.env.MONGODB_URI && !process.env.MONGODB_URI.includes('localhost')) {
+  connectDB();
+  console.log('📊 Running in MongoDB mode');
+} else {
+  console.log('🎯 Running in DEMO mode (in-memory storage)');
+  console.log('⚠️  Data will be lost on server restart');
+}
 
 // Routes
 app.use('/api/auth', authRoutes);

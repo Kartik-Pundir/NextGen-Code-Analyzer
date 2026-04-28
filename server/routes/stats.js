@@ -1,11 +1,31 @@
 import express from 'express';
 import Analysis from '../models/Analysis.js';
 import { authMiddleware } from '../middleware/auth.js';
+import { demoStorage } from '../demo-mode.js';
 
 const router = express.Router();
+const DEMO_MODE = !process.env.MONGODB_URI || process.env.MONGODB_URI.includes('localhost');
 
 router.get('/dashboard', authMiddleware, async (req, res) => {
   try {
+    if (DEMO_MODE) {
+      // Demo mode - in-memory storage
+      const analyses = demoStorage.getUserAnalyses(req.userId);
+      const demoStats = demoStorage.getAnalysisStats(req.userId);
+
+      const stats = {
+        total: demoStats.totalAnalyses,
+        totalIssues: demoStats.totalIssues,
+        cleanFiles: analyses.filter(a => a.issues?.length === 0).length,
+        avgComplexity: demoStats.avgComplexity,
+        avgMaintainability: demoStats.avgMaintainability,
+        recentAnalyses: analyses.slice(0, 5)
+      };
+
+      return res.json(stats);
+    }
+
+    // MongoDB mode
     const analyses = await Analysis.find({ userId: req.userId })
       .sort({ createdAt: -1 })
       .select('-code');
